@@ -4,12 +4,12 @@ import { render } from "../../../utils/test-utils";
 import Login from "../Login";
 
 describe("Login Component", () => {
-  const renderLogin = () => {
-    render(<Login />);
+  const renderLogin = async () => {
+    await render(<Login />);
   };
 
-  it("renders login form with all elements", () => {
-    renderLogin();
+  it("renders login form with all elements", async () => {
+    await renderLogin();
 
     expect(screen.getByText("Saffron")).toBeInTheDocument();
     expect(screen.getByText("Portfolio Management Demo")).toBeInTheDocument();
@@ -18,8 +18,8 @@ describe("Login Component", () => {
     expect(screen.getByRole("button", { name: /login/i })).toBeInTheDocument();
   });
 
-  it("shows warning banner", () => {
-    renderLogin();
+  it("shows warning banner", async () => {
+    await renderLogin();
 
     expect(screen.getByText("⚠️ Test Environment Only")).toBeInTheDocument();
     expect(
@@ -27,8 +27,8 @@ describe("Login Component", () => {
     ).toBeInTheDocument();
   });
 
-  it("shows demo credentials", () => {
-    renderLogin();
+  it("shows demo credentials", async () => {
+    await renderLogin();
 
     const loginInfo = screen.getByText((content, element) => {
       return (
@@ -46,8 +46,8 @@ describe("Login Component", () => {
     ).toBeInTheDocument();
   });
 
-  it("handles input changes", () => {
-    renderLogin();
+  it("handles input changes", async () => {
+    await renderLogin();
 
     const usernameInput = screen.getByPlaceholderText("Username");
     const passwordInput = screen.getByPlaceholderText("Password");
@@ -59,8 +59,8 @@ describe("Login Component", () => {
     expect(passwordInput).toHaveValue("testpass");
   });
 
-  it("handles form submission with wrong credentials", () => {
-    renderLogin();
+  it("handles form submission with wrong credentials", async () => {
+    await renderLogin();
 
     const usernameInput = screen.getByPlaceholderText("Username");
     const passwordInput = screen.getByPlaceholderText("Password");
@@ -73,8 +73,8 @@ describe("Login Component", () => {
     expect(screen.getByText("Invalid credentials")).toBeInTheDocument();
   });
 
-  it("handles successful login", () => {
-    renderLogin();
+  it("handles successful login", async () => {
+    await renderLogin();
 
     const usernameInput = screen.getByPlaceholderText("Username");
     const passwordInput = screen.getByPlaceholderText("Password");

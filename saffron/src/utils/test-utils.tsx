@@ -1,4 +1,5 @@
 import React from "react";
+import { act } from "react";
 import { render as rtlRender } from "@testing-library/react";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
@@ -17,7 +18,7 @@ interface RenderOptions {
   store?: ReturnType<typeof configureStore>;
 }
 
-function render(
+async function render(
   ui: React.ReactElement,
   {
     preloadedState,
@@ -36,15 +37,19 @@ function render(
     );
   }
 
-  const result = rtlRender(ui, {
-    wrapper: Wrapper,
-    ...renderOptions,
+  let result: ReturnType<typeof rtlRender> & { store: typeof store };
+
+  await act(async () => {
+    result = {
+      ...rtlRender(ui, {
+        wrapper: Wrapper,
+        ...renderOptions,
+      }),
+      store,
+    };
   });
 
-  return {
-    ...result,
-    store,
-  };
+  return result!;
 }
 
 // Re-export everything
