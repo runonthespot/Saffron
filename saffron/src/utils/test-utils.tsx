@@ -1,6 +1,6 @@
 import React from "react";
 import { render as rtlRender, RenderResult } from "@testing-library/react";
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, combineReducers, Store } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
@@ -14,12 +14,12 @@ const rootReducer = combineReducers({
 
 interface RenderOptions {
   preloadedState?: Partial<RootState>;
-  store?: ReturnType<typeof configureStore>;
+  store?: Store;
 }
 
-interface ExtendedRenderResult extends RenderResult {
-  store: ReturnType<typeof configureStore>;
-}
+type CustomRenderResult = Omit<RenderResult, "store"> & {
+  store: Store;
+};
 
 function render(
   ui: React.ReactElement,
@@ -31,7 +31,7 @@ function render(
     }),
     ...renderOptions
   }: RenderOptions = {}
-): ExtendedRenderResult {
+): CustomRenderResult {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
       <Provider store={store}>
@@ -43,7 +43,7 @@ function render(
   const renderResult = rtlRender(ui, {
     wrapper: Wrapper,
     ...renderOptions,
-  }) as ExtendedRenderResult;
+  });
 
   return {
     ...renderResult,
