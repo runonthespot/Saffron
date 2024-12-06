@@ -18,6 +18,66 @@ Saffron is a simple portfolio management prototype that includes:
 - Vercel Analytics integration
 - OpenAI API for portfolio suggestions
 
+## Testing
+
+### Running Tests
+```bash
+# Run all tests
+yarn test
+
+# Run tests in watch mode (recommended during development)
+yarn test --watch
+
+# Run tests with coverage report
+yarn test --coverage
+
+# Run specific test file
+yarn test src/features/auth/__tests__/Login.test.tsx
+```
+
+### Test Structure
+```
+src/
+├── __tests__/          # Global test files
+├── features/
+│   ├── auth/
+│   │   └── __tests__/  # Authentication tests
+│   ├── portfolio/
+│   │   └── __tests__/  # Portfolio tests
+│   └── ...
+└── utils/
+    └── test-utils.tsx  # Test utilities
+```
+
+### Test Coverage
+The test suite covers:
+- Redux state management
+- Component rendering
+- User interactions
+- Form submissions
+- Error handling
+- Environment variable handling
+
+### Writing Tests
+Tests are written using:
+- Jest as the test runner
+- React Testing Library for component testing
+- Custom test utilities for Redux and Material-UI integration
+
+Example test:
+```typescript
+import { render, screen, fireEvent } from '../utils/test-utils';
+
+describe('Component Test', () => {
+  it('should handle user interaction', () => {
+    render(<YourComponent />);
+    const button = screen.getByRole('button');
+    fireEvent.click(button);
+    expect(screen.getByText('Result')).toBeInTheDocument();
+  });
+});
+```
+
 ## Setup Instructions
 
 ### Prerequisites

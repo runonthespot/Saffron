@@ -1,21 +1,24 @@
 import React from "react";
 import { render as rtlRender } from "@testing-library/react";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, PreloadedState } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/theme";
 import authReducer from "../features/auth/authSlice";
+import { AppState } from "../types/store";
 // Import other reducers as needed
+
+const rootReducer = {
+  auth: authReducer,
+  // Add other reducers here
+};
 
 function render(
   ui: React.ReactElement,
   {
-    preloadedState = {},
+    preloadedState = {} as PreloadedState<AppState>,
     store = configureStore({
-      reducer: {
-        auth: authReducer,
-        // Add other reducers here
-      },
+      reducer: rootReducer,
       preloadedState,
     }),
     ...renderOptions
