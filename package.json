@@ -2,5 +2,10 @@
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
     "react-markdown": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "identity-obj-proxy": "^3.0.0",
+    "ts-jest": "^29.2.5"
   }
 }

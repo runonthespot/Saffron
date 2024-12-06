@@ -30,9 +30,20 @@ describe("Login Component", () => {
   it("shows demo credentials", () => {
     renderLogin();
 
-    expect(screen.getByText("Demo credentials:")).toBeInTheDocument();
-    expect(screen.getByText(/Username:/)).toBeInTheDocument();
-    expect(screen.getByText(/Password:/)).toBeInTheDocument();
+    const loginInfo = screen.getByText((content, element) => {
+      return (
+        element?.className === "login-info" &&
+        content.includes("Demo credentials:")
+      );
+    });
+    expect(loginInfo).toBeInTheDocument();
+
+    expect(
+      screen.getByText((content) => content.includes("guest"))
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText((content) => content.includes("impulse"))
+    ).toBeInTheDocument();
   });
 
   it("handles input changes", () => {
@@ -73,7 +84,6 @@ describe("Login Component", () => {
     fireEvent.change(passwordInput, { target: { value: "impulse" } });
     fireEvent.click(submitButton);
 
-    // Error message should not be present
     expect(screen.queryByText("Invalid credentials")).not.toBeInTheDocument();
   });
 });

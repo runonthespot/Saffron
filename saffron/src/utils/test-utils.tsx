@@ -1,28 +1,32 @@
 import React from "react";
 import { render as rtlRender } from "@testing-library/react";
-import { configureStore, PreloadedState } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import type { RootState } from "../store";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/theme";
 import authReducer from "../features/auth/authSlice";
-import { AppState } from "../types/store";
-// Import other reducers as needed
 
 const rootReducer = {
   auth: authReducer,
   // Add other reducers here
 };
 
+interface RenderOptions {
+  preloadedState?: Partial<RootState>;
+  store?: ReturnType<typeof configureStore>;
+}
+
 function render(
   ui: React.ReactElement,
   {
-    preloadedState = {} as PreloadedState<AppState>,
+    preloadedState,
     store = configureStore({
       reducer: rootReducer,
-      preloadedState,
+      preloadedState: preloadedState as any,
     }),
     ...renderOptions
-  } = {}
+  }: RenderOptions = {}
 ) {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
