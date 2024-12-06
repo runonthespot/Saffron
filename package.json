@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@vercel/analytics": "^1.4.1",
     "react-markdown": "^9.0.1"
   }
 }
