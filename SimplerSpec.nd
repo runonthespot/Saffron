@@ -1,0 +1,62 @@
+**Prompt:**
+
+Create an interactive web application that helps users visualize their pension savings outcomes over long time horizons and provides personalized portfolio recommendations based on user inputs. The application should be developed using React with TypeScript (functional components using arrow functions) and styled with SCSS. Utilize Material-UI (MUI) v5 for UI components and Lucide Icons for consistent iconography.
+
+---
+
+**Core Features:**
+
+1. **User Qualification Module:**
+   - An interactive form collecting essential user information, such as age, income, existing savings, contribution capacity, retirement targets, investment experience, and risk tolerance.
+   - Enhanced input experiences with smart defaults, sliders, stepped inputs, visual scales, and illustrative cards.
+   - Validation rules for each input and progressive disclosure of sections.
+   - Form state management with the ability to navigate back and save progress.
+
+2. **Portfolio Construction Module:**
+   - An algorithm-driven selection of up to 5 optimal assets based on the user's profile, including assets like Global Equities, Bonds, REITs, and Cash.
+   - Interactive allocation adjustment interface within reasonable bounds.
+   - Display of dynamic risk metrics and expected return ranges.
+   - Visual representations using interactive donut charts, risk meters, and hierarchical treemaps.
+
+3. **Simulation Visualization Module:**
+   - An interactive projection chart showing the potential growth of the user's portfolio over time using client-side Monte Carlo simulations.
+   - Features like hover effects, tooltips with detailed information, real vs. nominal values toggle, and the ability to show/hide confidence intervals.
+   - Enhanced chart aesthetics with gradient area fills, smooth animations, and responsive scaling.
+
+---
+
+**Technical Implementation:**
+
+- **Frontend Architecture:**
+  - Use React, TypeScript, following functional programming practices with hooks and arrow functions.
+  - Structure components for reusability and maintainability.
+  - Implement responsive design for both desktop (split-screen layout) and mobile devices (vertical stack with smooth transitions).
+
+- **State Management:**
+  - Utilize React Context or Redux with Redux Toolkit for efficient state management.
+  - Optional use of Redux Persist for state persistence across sessions.
+
+- **Styling and Theming:**
+  - Style the application with SCSS modules, adhering to the specified color palette and typography.
+  - Modern, slick, pretty, Fintech, teal themed.
+  - Ensure consistent spacing and layout across components.
+
+- **Data Visualization:**
+  - Leverage the Recharts library and custom SVG elements for creating interactive charts and visual elements.
+  - Perform real-time calculations and updates based on user interactions.
+
+---
+
+**Performance Targets and Constraints:**
+
+- Aim for an initial load time under 2 seconds, input response under 100ms, and chart updates under 500ms.
+- Ensure smooth 60fps animations for a fluid user experience.
+- Develop the application as a browser-based, client-side solution with no backend or data persistence requirements.
+
+---
+
+**User Experience:**
+
+- Design the application to be user-friendly and intuitive, allowing users to complete the journey in under 5 minutes.
+- Use clear, non-technical language suitable for UK pension tech professionals.
+- Provide immediate visual feedback and maintain a professional fintech appearance.
