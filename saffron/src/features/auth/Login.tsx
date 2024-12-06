@@ -24,7 +24,15 @@ const Login: React.FC = () => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
-        <h2>Login</h2>
+        <div className="warning-banner">
+          ⚠️ Test Environment Only
+          <p>
+            This is a demonstration prototype built with Cursor AI. Not for real
+            investment use.
+          </p>
+        </div>
+        <h2>Saffron</h2>
+        <div className="subtitle">Portfolio Management Demo</div>
         {error && <div className="error-message">{error}</div>}
         <div className="form-group">
           <input
@@ -51,6 +59,13 @@ const Login: React.FC = () => {
           />
         </div>
         <button type="submit">Login</button>
+        <div className="login-info">
+          Demo credentials:
+          <br />
+          Username: guest
+          <br />
+          Password: impulse
+        </div>
       </form>
     </div>
   );
