@@ -10,8 +10,8 @@ jest.mock("react-markdown", () => ({
 jest.mock("./assets/illustrations/growing_analytics.svg", () => "svg");
 
 describe("App Component", () => {
-  it("renders login form when not authenticated", async () => {
-    await render(<App />);
+  it("renders login form when not authenticated", () => {
+    render(<App />);
     expect(screen.getByText("Saffron")).toBeInTheDocument();
     expect(screen.getByText("Portfolio Management Demo")).toBeInTheDocument();
   });

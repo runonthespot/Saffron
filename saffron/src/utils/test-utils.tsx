@@ -1,6 +1,5 @@
 import React from "react";
-import { act } from "react";
-import { render as rtlRender } from "@testing-library/react";
+import { render as rtlRender, RenderResult } from "@testing-library/react";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { Provider } from "react-redux";
@@ -18,7 +17,11 @@ interface RenderOptions {
   store?: ReturnType<typeof configureStore>;
 }
 
-async function render(
+interface ExtendedRenderResult extends RenderResult {
+  store: ReturnType<typeof configureStore>;
+}
+
+function render(
   ui: React.ReactElement,
   {
     preloadedState,
@@ -28,7 +31,7 @@ async function render(
     }),
     ...renderOptions
   }: RenderOptions = {}
-) {
+): ExtendedRenderResult {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
       <Provider store={store}>
@@ -37,19 +40,15 @@ async function render(
     );
   }
 
-  let result: ReturnType<typeof rtlRender> & { store: typeof store };
+  const renderResult = rtlRender(ui, {
+    wrapper: Wrapper,
+    ...renderOptions,
+  }) as ExtendedRenderResult;
 
-  await act(async () => {
-    result = {
-      ...rtlRender(ui, {
-        wrapper: Wrapper,
-        ...renderOptions,
-      }),
-      store,
-    };
-  });
-
-  return result!;
+  return {
+    ...renderResult,
+    store,
+  };
 }
 
 // Re-export everything
