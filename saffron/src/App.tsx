@@ -16,6 +16,7 @@ import QualificationForm from "./features/qualification/QualificationForm";
 import PortfolioBuilder from "./features/portfolio/PortfolioBuilder";
 import { useTypedSelector } from "./hooks/useAppSelector";
 import Login from "./features/auth/Login";
+import { Analytics } from "@vercel/analytics/react";
 
 const AppContent: React.FC = () => {
   const [showQualification, setShowQualification] = useState(false);
