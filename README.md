@@ -5,7 +5,7 @@ This project was created as a test implementation using Cursor Agents, an AI-pow
 
 ## About
 Saffron is a simple portfolio management prototype that includes:
-- Basic authentication (username: guest / password: impulse)
+- Basic authentication (configurable via environment variables)
 - Portfolio qualification questionnaire
 - Portfolio builder interface
 - Investment simulation tools
@@ -16,6 +16,7 @@ Saffron is a simple portfolio management prototype that includes:
 - Material-UI (MUI) for components
 - SCSS for styling
 - Vercel Analytics integration
+- OpenAI API for portfolio suggestions
 
 ## Setup Instructions
 
@@ -23,6 +24,7 @@ Saffron is a simple portfolio management prototype that includes:
 - Node.js (v16 or higher)
 - Yarn package manager
 - Git
+- OpenAI API key (for portfolio suggestions)
 
 ### Step 1: Clone the Repository
 ```bash
@@ -31,10 +33,33 @@ cd Saffron/saffron
 ```
 
 ### Step 2: Environment Setup
-Create a `.env` file in the `saffron` directory:
-```env
-REACT_APP_VERCEL_ANALYTICS_ID=your_vercel_analytics_id
+1. Copy the example environment file:
+```bash
+cp .env.example .env
 ```
+
+2. Edit the `.env` file with your specific values:
+```env
+# Analytics
+REACT_APP_VERCEL_ANALYTICS_ID=your_vercel_analytics_id
+
+# Authentication (default: guest/impulse)
+REACT_APP_AUTH_USERNAME=guest
+REACT_APP_AUTH_PASSWORD=impulse
+
+# OpenAI API (Required for portfolio suggestions)
+REACT_APP_OPENAI_API_KEY=your_openai_api_key
+```
+
+For local development:
+- You can keep the default authentication credentials (guest/impulse)
+- Replace `your_openai_api_key` with your actual OpenAI API key
+- The Vercel Analytics ID is optional for local development
+
+For production deployment:
+- Change the authentication credentials
+- Ensure all API keys are properly set
+- Never commit your `.env` file to version control
 
 ### Step 3: Install Dependencies
 ```bash
@@ -70,16 +95,27 @@ saffron/
 ```
 
 ### Authentication
-The demo uses a simple hardcoded authentication:
-- Username: `guest`
-- Password: `impulse`
+The demo uses environment variables for authentication:
+- Username: Set via `REACT_APP_AUTH_USERNAME` (default: guest)
+- Password: Set via `REACT_APP_AUTH_PASSWORD` (default: impulse)
+
+For development and testing purposes, you can use the default credentials, but make sure to change them for any other use.
+
+### API Keys
+- OpenAI API key is required for portfolio suggestions functionality
+- Never commit API keys to version control
+- Use environment variables for all sensitive credentials
 
 ### Deployment
 The project is configured for deployment on Vercel:
 1. Fork the repository
 2. Create a new project on Vercel
 3. Connect your forked repository
-4. Add environment variables in Vercel dashboard
+4. Add environment variables in Vercel dashboard:
+   - `REACT_APP_VERCEL_ANALYTICS_ID`
+   - `REACT_APP_AUTH_USERNAME`
+   - `REACT_APP_AUTH_PASSWORD`
+   - `REACT_APP_OPENAI_API_KEY`
 5. Deploy
 
 ## Purpose

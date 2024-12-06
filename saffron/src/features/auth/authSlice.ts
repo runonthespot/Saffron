@@ -19,8 +19,8 @@ const authSlice = createSlice({
       action: PayloadAction<{ username: string; password: string }>
     ) => {
       if (
-        action.payload.username === "guest" &&
-        action.payload.password === "impulse"
+        action.payload.username === process.env.REACT_APP_AUTH_USERNAME &&
+        action.payload.password === process.env.REACT_APP_AUTH_PASSWORD
       ) {
         state.isAuthenticated = true;
         state.error = null;

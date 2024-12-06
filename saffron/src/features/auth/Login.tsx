@@ -62,9 +62,9 @@ const Login: React.FC = () => {
         <div className="login-info">
           Demo credentials:
           <br />
-          Username: guest
+          Username: {process.env.REACT_APP_AUTH_USERNAME || "guest"}
           <br />
-          Password: impulse
+          Password: {process.env.REACT_APP_AUTH_PASSWORD || "impulse"}
         </div>
       </form>
     </div>
