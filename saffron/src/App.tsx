@@ -15,12 +15,18 @@ import Layout from "./components/common/Layout";
 import QualificationForm from "./features/qualification/QualificationForm";
 import PortfolioBuilder from "./features/portfolio/PortfolioBuilder";
 import { useTypedSelector } from "./hooks/useAppSelector";
+import Login from "./features/auth/Login";
 
 const AppContent: React.FC = () => {
   const [showQualification, setShowQualification] = useState(false);
   const { isComplete: isQualificationComplete } = useTypedSelector(
     (state) => state.qualification
   );
+  const { isAuthenticated } = useTypedSelector((state) => state.auth);
+
+  if (!isAuthenticated) {
+    return <Login />;
+  }
 
   return (
     <Layout>
