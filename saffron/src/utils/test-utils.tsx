@@ -1,16 +1,16 @@
 import React from "react";
 import { render as rtlRender } from "@testing-library/react";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/theme";
 import authReducer from "../features/auth/authSlice";
 
-const rootReducer = {
+const rootReducer = combineReducers({
   auth: authReducer,
   // Add other reducers here
-};
+});
 
 interface RenderOptions {
   preloadedState?: Partial<RootState>;
@@ -35,7 +35,16 @@ function render(
       </Provider>
     );
   }
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+
+  const result = rtlRender(ui, {
+    wrapper: Wrapper,
+    ...renderOptions,
+  });
+
+  return {
+    ...result,
+    store,
+  };
 }
 
 // Re-export everything

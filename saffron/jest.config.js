@@ -13,14 +13,18 @@ module.exports = {
 
   // Transform files
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      tsconfig: 'tsconfig.json',
+      isolatedModules: true,
+    }],
     '^.+\\.svg$': '<rootDir>/src/utils/svgTransform.js'
   },
 
   // Module name mapper for non-JS modules
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '^react-markdown$': '<rootDir>/src/utils/mockMarkdown.js'
+    '^react-markdown$': '<rootDir>/src/utils/mockMarkdown.js',
+    '\\.svg$': '<rootDir>/src/utils/svgTransform.js'
   },
 
   // Setup files
@@ -31,6 +35,12 @@ module.exports = {
 
   // Transform ignore patterns
   transformIgnorePatterns: [
-    '/node_modules/(?!(react-markdown|vfile|vfile-message|unist-.*|unified|bail|is-plain-obj|trough|remark-.*|mdast-util-.*|micromark.*|decode-named-character-reference|character-entities|property-information|hast-util-whitespace|space-separated-tokens|comma-separated-tokens|pretty-bytes|trim-lines)/)'
-  ]
+    'node_modules/(?!(react-markdown|vfile|vfile-message|unist-.*|unified|bail|is-plain-obj|trough|remark-.*|mdast-util-.*|micromark.*|decode-named-character-reference|character-entities|property-information|hast-util-whitespace|space-separated-tokens|comma-separated-tokens|pretty-bytes|trim-lines)/)'
+  ],
+
+  // Handle ESM modules
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  
+  // Ignore the punycode warning
+  modulePathIgnorePatterns: ['node_modules/punycode/'],
 }; 
